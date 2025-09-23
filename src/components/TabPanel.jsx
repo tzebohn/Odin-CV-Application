@@ -4,23 +4,34 @@ import { FaGraduationCap } from "react-icons/fa6";
 import { BiSolidBriefcaseAlt2 } from "react-icons/bi";
 import { useState } from "react";
 import { PersonalForm } from "./PersonalForm";
+import { SkillsetForm } from "./SkillsetForm";
 export function TabPanel ({ userData, setUserData }) {
 
     //UseState hooks
     const [tab, setTab] = useState("personalTab") // Tab useState
+    const [isFormVisible, setIsFormVisible] = useState(false) // Skillset Form visibility
+    const [editingSkillSet, setEditingSkillset] = useState(false) // Used to determine if a user is currently editing a previous skillset
 
     //Tailwindcss styling
     let tabStyle = `flex justify-center items-center flex-1 sm:gap-2 cursor-pointer`
     let iconStyle = `text-sm sm:text-base md:text-xl lg:text-2xl`
-    let spanStyle = `break-words text-xs sm:text-sm md:text-base lg:text-xl`
+    let spanStyle = `break-words text-xs sm:text-sm lg:text-xl`
+    let addBtnStyle = `bg-blue-500 text-white font-semibold text-base md:text-lg p-1 px-2 md:p-2 md:px-4 rounded-lg cursor-pointer hover:bg-blue-600`
 
-    //Function updates Tab useState
+    // Function updates Tab useState
     const changeTab = (tabName) => {
         if (tab !== tabName) {
             //console.log(`Current tab: ${tab} Changing to: ${tabName}`)
             setTab(tabName)
+            setIsFormVisible(false) // Reset and hide when changing tabs
+            setEditingSkillset(false) // Reset and hide when changing tabs
         }
     } 
+
+    // Add new skill
+    const addSkill = (newSkill) => {
+        console.log("Adding skill:", newSkill)
+    }
 
     return (
         <>
@@ -59,6 +70,23 @@ export function TabPanel ({ userData, setUserData }) {
 
             { /* Tab Form Content */ }
             {tab === "personalTab" && <PersonalForm userData={userData} setUserData={setUserData} />}
+            {tab === "skillsetTab" &&
+                <> 
+                    {/* Add skillset button should only be visible if the form is not open */}
+                    {!isFormVisible && !editingSkillSet && (
+                        <div className="flex items-center justify-center my-4">
+                            <button onClick={() => setIsFormVisible(true)} className={`${addBtnStyle}`}>Add Skill</button>
+                        </div>
+                    )}
+
+                    {/* SkillSetForm is shown when the user is adding or editing a skill */}
+                    {isFormVisible && 
+                        <SkillsetForm 
+                            addSkill={addSkill}
+                        />
+                    }
+                </>
+            }
         </>
     )
 }
