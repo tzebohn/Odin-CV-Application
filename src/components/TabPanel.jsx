@@ -65,6 +65,26 @@ export function TabPanel ({ userData, setUserData }) {
         })
     }
 
+    // Delete skill card, given unique id
+    const deleteCard = (id) => {
+        //console.log("Deleting:", id)
+        setUserData(prev => {
+            const copy = [...prev.skills]
+
+            for (let i = 0; i < copy.length; i++) {
+                if (copy[i].id === id) {
+                    copy.splice(i, 1)
+                    break // Found and removed element
+                }
+            }
+            
+            return {
+                ...prev,
+                skills: copy
+            }
+        })
+    }
+
     return (
         <>
             <div className="flex min-w-0 w-full">
@@ -108,7 +128,7 @@ export function TabPanel ({ userData, setUserData }) {
                     <h1>Skills</h1>
                     <div className="flex flex-col gap-4 mt-2 mx-6">
                         {userData.skills.map(skill => (
-                            <SkillCard key={skill.id} skill={skill} setEditingSkillset={setEditingSkillset} editingSkillSet={editingSkillSet} updateSkill={updateSkill}/>
+                            <SkillCard key={skill.id} skill={skill} setEditingSkillset={setEditingSkillset} editingSkillSet={editingSkillSet} updateSkill={updateSkill} deleteCard={deleteCard}/>
                         ))}
                     </div>
 

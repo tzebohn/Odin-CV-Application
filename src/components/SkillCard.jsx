@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { MdModeEditOutline, MdDelete } from "react-icons/md";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
-export function SkillCard ({ skill, editingSkillSet, setEditingSkillset, updateSkill }) {
+export function SkillCard ({ skill, editingSkillSet, setEditingSkillset, updateSkill, deleteCard }) {
 
     // USESTATES
     const [newSkill, setNewSkill] = useState(skill.skill) // Default value is the current skill description
@@ -20,6 +20,7 @@ export function SkillCard ({ skill, editingSkillSet, setEditingSkillset, updateS
         }
     }, [showDetails, skill.skill])
 
+    // Function gets called when user makes an edit on an exist skill and saves it.
     function handleEdit (e) {
         e.preventDefault()
 
@@ -53,12 +54,12 @@ export function SkillCard ({ skill, editingSkillSet, setEditingSkillset, updateS
 
                         <div className="flex items-center justify-evenly">
                             <button type="submit" className={`${btnStyle}`}>Save</button>
-                            <button type="button" className={`${btnStyle} bg-red-500 hover:bg-red-600`}>Delete</button>
+                            <button type="button" className={`${btnStyle} bg-red-500 hover:bg-red-600`} onClick={() => deleteCard(skill.id)}>Delete</button>
                         </div>
                     </div>
                 </form>
             ) : (
-                <div className="bg-gray-200 rounded-lg p-2 cursor-pointer" onClick={() => setShowDetails(prev => !prev)}>
+                <div className="bg-gray-200 rounded-lg p-2 cursor-pointer hover:bg-gray-300" onClick={() => setShowDetails(prev => !prev)}>
                     <div className="flex items-center justify-between w-full">
                         <span className="truncate">{skill.skill}</span>
                         <IoMdArrowDropdown className={`${dropdownIcon}`}/> 
