@@ -5,6 +5,7 @@ import { BiSolidBriefcaseAlt2 } from "react-icons/bi";
 import { useState } from "react";
 import { PersonalForm } from "./PersonalForm";
 import { SkillsetForm } from "./SkillsetForm";
+import { SkillCard } from "./SkillCard";
 export function TabPanel ({ userData, setUserData }) {
 
     //UseState hooks
@@ -30,7 +31,38 @@ export function TabPanel ({ userData, setUserData }) {
 
     // Add new skill
     const addSkill = (newSkill) => {
-        console.log("Adding skill:", newSkill)
+        //console.log("Adding skill:", newSkill);
+        setUserData(prev => {
+            const copy = [...prev.skills] // Shallow copy of nested array in userData object
+            copy.push({
+                id: crypto.randomUUID(), // Create unique key for each skill
+                skill: newSkill
+            })
+
+            return { 
+                ...prev,
+                skills: copy // Update with new array
+            }
+        })
+        setIsFormVisible(false) // Hide form and editing
+        setEditingSkillset(false)
+    }
+
+    // Modifies old with new skill
+    function updateSkill (newSkill, id) {
+        setUserData(prev => {
+            const copy = [...prev.skills] 
+
+            for (let i = 0; i < copy.length; i++) {
+                if (copy[i].id === id) copy[i].skill = newSkill
+            }
+
+            //console.log(copy)
+            return {
+                ...prev,
+                skills: copy
+            }
+        })
     }
 
     return (
@@ -71,7 +103,15 @@ export function TabPanel ({ userData, setUserData }) {
             { /* Tab Form Content */ }
             {tab === "personalTab" && <PersonalForm userData={userData} setUserData={setUserData} />}
             {tab === "skillsetTab" &&
-                <> 
+                <>  
+                    {/* Display each skill card */}
+                    <h1>Skills</h1>
+                    <div className="flex flex-col gap-4 mt-2 mx-6">
+                        {userData.skills.map(skill => (
+                            <SkillCard key={skill.id} skill={skill} setEditingSkillset={setEditingSkillset} editingSkillSet={editingSkillSet} updateSkill={updateSkill}/>
+                        ))}
+                    </div>
+
                     {/* Add skillset button should only be visible if the form is not open */}
                     {!isFormVisible && !editingSkillSet && (
                         <div className="flex items-center justify-center my-4">
@@ -83,6 +123,7 @@ export function TabPanel ({ userData, setUserData }) {
                     {isFormVisible && 
                         <SkillsetForm 
                             addSkill={addSkill}
+                            setIsFormVisible={setIsFormVisible}
                         />
                     }
                 </>
