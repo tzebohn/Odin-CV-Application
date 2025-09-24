@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export function SkillsetForm ({ addSkill }) {
+export function SkillsetForm ({ addSkill, setIsFormVisible }) {
 
     // USESTATES 
     const [skillDescription, setSkillDescription] = useState('') // Used to keep track of the skill user types
@@ -25,7 +25,7 @@ export function SkillsetForm ({ addSkill }) {
     return (
         <form onSubmit={handleSubmit} className="flex items-center justify-center p-4 sm:block">
             <div className="flex flex-col gap-1">
-                <label htmlFor="skillset" className={`${labelStyle}`}>Skill</label>
+                <label htmlFor="skillset" className={`${labelStyle}`}>Add Skill</label>
                 <div className="flex items-center justify-center w-full gap-2 sm:block">
                     <input 
                         id="skillset" 
@@ -36,14 +36,14 @@ export function SkillsetForm ({ addSkill }) {
                         placeholder="Add Skill" 
                         className={`${inputStyle}`} 
                     />
-                    <button className={`${btnStyle}`}>Confirm</button>
-                    <button className={`${btnStyle} bg-red-500 hover:bg-red-600`}>Cancel</button>
+                    <button type="submit" className={`${btnStyle}`}>Confirm</button>
+                    <button type="button" className={`${btnStyle} bg-red-500 hover:bg-red-600`} onClick={() => setIsFormVisible(false)}>Cancel</button>
                 </div>
             </div>
 
             <div className="hidden sm:flex justify-center items-center gap-6 mt-6">
-                <button className={`${confirmBtnStyle}`}>Confirm</button>
-                <button className={`${confirmBtnStyle} bg-red-500 hover:bg-red-600`}>Cancel</button>
+                <button type="submit" className={`${confirmBtnStyle}`}>Confirm</button>
+                <button type="button" className={`${confirmBtnStyle} bg-red-500 hover:bg-red-600`} onClick={() => setIsFormVisible(false)}>Cancel</button>
             </div>
 
         </form>
