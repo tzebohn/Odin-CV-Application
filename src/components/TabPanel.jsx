@@ -6,12 +6,14 @@ import { useState } from "react";
 import { PersonalForm } from "./PersonalForm";
 import { SkillsetForm } from "./SkillsetForm";
 import { SkillCard } from "./SkillCard";
+import { EducationForm } from "./EducationForm";
 export function TabPanel ({ userData, setUserData }) {
 
     //UseState hooks
     const [tab, setTab] = useState("personalTab") // Tab useState
     const [isFormVisible, setIsFormVisible] = useState(false) // Skillset Form visibility
     const [editingSkillSet, setEditingSkillset] = useState(false) // Used to determine if a user is currently editing a previous skillset
+    const [showEducationForm, setShowEducationForm] = useState(false) // Education Form visibility
 
     //Tailwindcss styling
     let tabStyle = `flex justify-center items-center flex-1 sm:gap-2 cursor-pointer`
@@ -85,6 +87,8 @@ export function TabPanel ({ userData, setUserData }) {
         })
     }
 
+    // TODO: FUNCTION ADDS EDUCATION OBJECT TO USERDATA EDUCATION ARRAY
+
     return (
         <>
             <div className="flex min-w-0 w-full">
@@ -145,6 +149,21 @@ export function TabPanel ({ userData, setUserData }) {
                             addSkill={addSkill}
                             setIsFormVisible={setIsFormVisible}
                         />
+                    }
+                </>
+            }
+            {tab === "educationTab" && 
+                <>  
+                    {/* Add education button should only be visible if the form is not open */}
+                    {!showEducationForm && (
+                        <div className="flex items-center justify-center my-4">
+                            <button onClick={() => setShowEducationForm(true)} className={`${addBtnStyle}`}>Add Education</button>
+                        </div>
+                    )}
+
+                    {/* EducationForm is shown when the user is adding or editing a skill */}
+                    {showEducationForm && 
+                        <EducationForm />
                     }
                 </>
             }
