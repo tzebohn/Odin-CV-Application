@@ -1,17 +1,33 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { usaUniversityOptions } from "../utils/universityOptions"
 import CreatableSelect from 'react-select/creatable';
 
 console.log(usaUniversityOptions)
-export function EducationForm ({ addEducation }) {
+export function EducationForm ({ initialData, onSubmit }) {
 
-    // USESTATES
-    const [educationEntry, setEducationEntry] = useState({
-        university: "",
-        degree: "",
-        startYear: "", 
-        endYear: ""
-    })
+    // USESTATES HOOKS
+    
+    /**
+     * State to store education form data.
+     * If editing, use initialData as default values.
+     * If adding new entry, use empty fields.
+     */
+    const [educationEntry, setEducationEntry] = useState( 
+        initialData || {
+            university: "",
+            degree: "",
+            startYear: "",
+            endYear: ""
+        }
+    )
+
+    // USEEFFECTS HOOKS
+    // Update educationEntry state only when user is modifying existing form
+    useEffect(() => { 
+        if (initialData) {
+            setEducationEntry(initialData);
+        }
+    }, [initialData]);
 
     // CSS Styling
     const customStyles = {
@@ -41,18 +57,10 @@ export function EducationForm ({ addEducation }) {
     let btnStyle = `bg-blue-500 text-white font-semibold text-base md:text-lg p-1 px-2 md:p-2 md:px-4 rounded-lg cursor-pointer hover:bg-blue-600`
 
 
+    // Handles when user is submiting initial education form
     function handleSubmit (e) {
         e.preventDefault()
-
-        //console.log(educationEntry)
-        // TODO: VALIDATE THE EDUCATION DATA AND CALL FUNCTION IN TABPANEL TO ADD EDUCATION OBJECT TO USERDATA
-        addEducation(educationEntry)
-        setEducationEntry({ // Clear input fields
-            university: "",
-            degree: "",
-            startYear: "", 
-            endYear: ""
-        })
+        onSubmit(educationEntry)
     }
 
     return ( 

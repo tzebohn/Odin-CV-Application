@@ -15,6 +15,7 @@ export function TabPanel ({ userData, setUserData }) {
     const [isFormVisible, setIsFormVisible] = useState(false) // Skillset Form visibility
     const [editingSkillSet, setEditingSkillset] = useState(false) // Used to determine if a user is currently editing a previous skillset
     const [showEducationForm, setShowEducationForm] = useState(false) // Education Form visibility
+    const [editingEducation, setEditingEducation] = useState(false) // Check if the user is editing existing education form
 
     //Tailwindcss styling
     let tabStyle = `flex justify-center items-center flex-1 sm:gap-2 cursor-pointer`
@@ -97,13 +98,27 @@ export function TabPanel ({ userData, setUserData }) {
      * @param {string} edu.endYear - End year
      */
     function addEducation (edu) {
-        console.log(edu)
+        const newEdu = {
+            ...edu,
+            id: crypto.randomUUID()
+        }
         setUserData(prev => ({
             ...prev,
-            education: [...prev.education, edu]
+            education: [...prev.education, newEdu]
         }))
         setShowEducationForm(false)
     }
+
+    /**
+     * Updates an existing object in userData.education array
+     * @param {Object} newEdu - The modified education entry to update
+     * @param {string} newEdu.id - Unique ID of the education entry (generated with crypto.randomUUID())
+     * @param {string} newEdu.university - Name of university
+     * @param {string} newEdu.degree - Degree earned
+     * @param {string} newEdu.startYear - Start year
+     * @param {string} newEdu.endYear - End year
+     */
+    // TODO: WRITE updateEducationInfo FUNCTION 
 
     return (
         <>
@@ -174,7 +189,7 @@ export function TabPanel ({ userData, setUserData }) {
                     <h1>Universities</h1>
                     <div className="flex flex-col gap-4 mt-2 mx-6">
                         {userData.education.map(edu => (
-                            <EducationCard edu={edu}/>
+                            <EducationCard key={edu.id} edu={edu} onSave={(newEdu) => updateEducationInfo(newEdu)}/>
                         ))}
                     </div>
 
@@ -187,7 +202,9 @@ export function TabPanel ({ userData, setUserData }) {
 
                     {/* EducationForm is shown when the user is adding or editing a skill */}
                     {showEducationForm && 
-                        <EducationForm addEducation={addEducation}/>
+                        <EducationForm 
+                            onSubmit={newEdu => addEducation(newEdu)}
+                        />
                     }
                 </>
             }
