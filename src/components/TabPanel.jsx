@@ -7,6 +7,7 @@ import { PersonalForm } from "./PersonalForm";
 import { SkillsetForm } from "./SkillsetForm";
 import { SkillCard } from "./SkillCard";
 import { EducationForm } from "./EducationForm";
+import { EducationCard } from "./EducationCard";
 export function TabPanel ({ userData, setUserData }) {
 
     //UseState hooks
@@ -169,6 +170,14 @@ export function TabPanel ({ userData, setUserData }) {
             }
             {tab === "educationTab" && 
                 <>  
+                    { /* Display each education card */}
+                    <h1>Universities</h1>
+                    <div className="flex flex-col gap-4 mt-2 mx-6">
+                        {userData.education.map(edu => (
+                            <EducationCard edu={edu}/>
+                        ))}
+                    </div>
+
                     {/* Add education button should only be visible if the form is not open */}
                     {!showEducationForm && (
                         <div className="flex items-center justify-center my-4">
