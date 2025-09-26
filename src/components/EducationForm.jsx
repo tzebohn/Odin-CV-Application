@@ -3,7 +3,7 @@ import { usaUniversityOptions } from "../utils/universityOptions"
 import CreatableSelect from 'react-select/creatable';
 
 console.log(usaUniversityOptions)
-export function EducationForm () {
+export function EducationForm ({ addEducation }) {
 
     // USESTATES
     const [educationEntry, setEducationEntry] = useState({
@@ -46,6 +46,13 @@ export function EducationForm () {
 
         //console.log(educationEntry)
         // TODO: VALIDATE THE EDUCATION DATA AND CALL FUNCTION IN TABPANEL TO ADD EDUCATION OBJECT TO USERDATA
+        addEducation(educationEntry)
+        setEducationEntry({ // Clear input fields
+            university: "",
+            degree: "",
+            startYear: "", 
+            endYear: ""
+        })
     }
 
     return ( 

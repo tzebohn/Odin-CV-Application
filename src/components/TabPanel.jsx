@@ -87,7 +87,22 @@ export function TabPanel ({ userData, setUserData }) {
         })
     }
 
-    // TODO: FUNCTION ADDS EDUCATION OBJECT TO USERDATA EDUCATION ARRAY
+    /**
+     * Adds an education object to the userData.education array
+     * @param {Object} edu - The education entry to add
+     * @param {string} edu.university - Name of university
+     * @param {string} edu.degree - Degree earned
+     * @param {string} edu.startYear - Start year
+     * @param {string} edu.endYear - End year
+     */
+    function addEducation (edu) {
+        console.log(edu)
+        setUserData(prev => ({
+            ...prev,
+            education: [...prev.education, edu]
+        }))
+        setShowEducationForm(false)
+    }
 
     return (
         <>
@@ -163,7 +178,7 @@ export function TabPanel ({ userData, setUserData }) {
 
                     {/* EducationForm is shown when the user is adding or editing a skill */}
                     {showEducationForm && 
-                        <EducationForm />
+                        <EducationForm addEducation={addEducation}/>
                     }
                 </>
             }
