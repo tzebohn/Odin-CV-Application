@@ -9,6 +9,7 @@ function App () {
     email: "",
     birthday: "",
     skills: [],
+    education: [],
   });
 
   return (
