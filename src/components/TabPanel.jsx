@@ -119,6 +119,25 @@ export function TabPanel ({ userData, setUserData }) {
      * @param {string} newEdu.endYear - End year
      */
     // TODO: WRITE updateEducationInfo FUNCTION 
+    function updateEducationInfo (newEdu) {
+
+        setUserData(prev => {
+            const copy = [...prev.education]
+            
+            // Find the correct education object
+            for (let i = 0; i < copy.length; i++) {
+                if (copy[i].id === newEdu.id) {
+                    copy[i] = newEdu
+                    break
+                }
+            }
+
+            return {
+                ...prev,
+                education : copy
+            }
+        })
+    }
 
     return (
         <>
