@@ -3,10 +3,10 @@ import { usaUniversityOptions } from "../utils/universityOptions"
 import CreatableSelect from 'react-select/creatable';
 
 console.log(usaUniversityOptions)
-export function EducationForm ({ initialData, onSubmit }) {
+export function EducationForm ({ initialData, onSubmit, showDetails, onCancel, setShowEducationForm }) {
 
     // USESTATES HOOKS
-    
+
     /**
      * State to store education form data.
      * If editing, use initialData as default values.
@@ -141,6 +141,11 @@ export function EducationForm ({ initialData, onSubmit }) {
 
 
             <button className={`${btnStyle}`}>Save</button>
+            {showDetails ? (
+                <button type="button" className={`${btnStyle} bg-red-500 hover:bg-red-600`} onClick={() => onCancel(educationEntry)}>Delete</button>
+            ) : (
+                <button type="button" className={`${btnStyle} bg-red-500 hover:bg-red-600`} onClick={() => setShowEducationForm(false)}>Cancel</button>
+            )}
         </form>
     )
 }

@@ -118,7 +118,6 @@ export function TabPanel ({ userData, setUserData }) {
      * @param {string} newEdu.startYear - Start year
      * @param {string} newEdu.endYear - End year
      */
-    // TODO: WRITE updateEducationInfo FUNCTION 
     function updateEducationInfo (newEdu) {
 
         setUserData(prev => {
@@ -137,6 +136,20 @@ export function TabPanel ({ userData, setUserData }) {
                 education : copy
             }
         })
+    }
+
+    /**
+     * Deletes an existing object in userData.education array
+     * @param {Object} eduToDelete - The object to delete
+     * @param {string} newEdu.id - Unique ID of the education entry (generated with crypto.randomUUID())
+     * @param {string} newEdu.university - Name of university
+     * @param {string} newEdu.degree - Degree earned
+     * @param {string} newEdu.startYear - Start year
+     * @param {string} newEdu.endYear - End year
+     */
+    // TODO: WRITE deleteEducation FUNCTION
+    function deleteEducation (eduToDelete) {
+        console.log(eduToDelete)
     }
 
     return (
@@ -208,7 +221,12 @@ export function TabPanel ({ userData, setUserData }) {
                     <h1>Universities</h1>
                     <div className="flex flex-col gap-4 mt-2 mx-6">
                         {userData.education.map(edu => (
-                            <EducationCard key={edu.id} edu={edu} onSave={(newEdu) => updateEducationInfo(newEdu)}/>
+                            <EducationCard 
+                            key={edu.id} 
+                            edu={edu} 
+                            onSave={(newEdu) => updateEducationInfo(newEdu)} 
+                            onDelete={(eduToDelete) => deleteEducation(eduToDelete)}
+                            />
                         ))}
                     </div>
 
@@ -223,6 +241,7 @@ export function TabPanel ({ userData, setUserData }) {
                     {showEducationForm && 
                         <EducationForm 
                             onSubmit={newEdu => addEducation(newEdu)}
+                            setShowEducationForm={setShowEducationForm}
                         />
                     }
                 </>

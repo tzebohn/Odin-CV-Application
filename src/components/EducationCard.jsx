@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { EducationForm } from "./EducationForm";
 
-export function EducationCard ({ edu, onSave }) {
+export function EducationCard ({ edu, onSave, onDelete }) {
     // USESTATES
     const [showDetails, setShowDetails] = useState(false) // Expands or collapses the education card when user clicks it
 
@@ -27,6 +27,11 @@ export function EducationCard ({ edu, onSave }) {
                             onSubmit={(updatedEdu) => {
                                 onSave(updatedEdu)
                                 setShowDetails(false) // Collapse card after save
+                            }}
+                            showDetails={showDetails}
+                            onCancel={(eduToDelete) => {
+                                onDelete(eduToDelete)
+                                setShowDetails(false)
                             }}
                         />
                     </div>
