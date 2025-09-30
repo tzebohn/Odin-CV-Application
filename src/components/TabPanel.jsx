@@ -147,9 +147,12 @@ export function TabPanel ({ userData, setUserData }) {
      * @param {string} newEdu.startYear - Start year
      * @param {string} newEdu.endYear - End year
      */
-    // TODO: WRITE deleteEducation FUNCTION
     function deleteEducation (eduToDelete) {
-        console.log(eduToDelete)
+        //console.log(eduToDelete)
+        setUserData(prev => ({
+            ...prev,
+            education: prev.education.filter(edu => edu.id !== eduToDelete.id)
+        }))
     }
 
     return (
