@@ -8,6 +8,7 @@ import { SkillsetForm } from "./SkillsetForm";
 import { SkillCard } from "./SkillCard";
 import { EducationForm } from "./EducationForm";
 import { EducationCard } from "./EducationCard";
+import { ExperienceForm } from "./ExperienceForm";
 export function TabPanel ({ userData, setUserData }) {
 
     //UseState hooks
@@ -16,6 +17,7 @@ export function TabPanel ({ userData, setUserData }) {
     const [editingSkillSet, setEditingSkillset] = useState(false) // Used to determine if a user is currently editing a previous skillset
     const [showEducationForm, setShowEducationForm] = useState(false) // Education Form visibility
     const [editingEducation, setEditingEducation] = useState(false) // Check if the user is editing existing education form
+    const [showExperienceForm, setShowExperienceForm] = useState(false) // Experience Form visibility
 
     //Tailwindcss styling
     let tabStyle = `flex justify-center items-center flex-1 sm:gap-2 cursor-pointer`
@@ -244,6 +246,24 @@ export function TabPanel ({ userData, setUserData }) {
                     {showEducationForm && 
                         <EducationForm 
                             onSubmit={newEdu => addEducation(newEdu)}
+                            setShowEducationForm={setShowEducationForm}
+                        />
+                    }
+                </>
+            }
+            {tab === "experienceTab" &&
+                <>
+                    {/* Add experience button should only be visible if the form is not open */}
+                    {!showExperienceForm && (
+                        <div className="flex items-center justify-center my-4">
+                            <button onClick={() => setShowExperienceForm(true)} className={`${addBtnStyle}`}>Add Experience</button>
+                        </div>
+                    )}
+
+                    {/* ExperienceForm is shown when the user is adding or editing a skill */}
+                    {showExperienceForm && 
+                        <ExperienceForm 
+                            onSubmit={newExperience => console.log("Add new experience")}
                             setShowEducationForm={setShowEducationForm}
                         />
                     }
