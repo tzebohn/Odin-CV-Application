@@ -9,6 +9,7 @@ import { SkillCard } from "./SkillCard";
 import { EducationForm } from "./EducationForm";
 import { EducationCard } from "./EducationCard";
 import { ExperienceForm } from "./ExperienceForm";
+import { ExperienceCard } from "./ExperienceCard";
 export function TabPanel ({ userData, setUserData }) {
 
     //UseState hooks
@@ -157,6 +158,64 @@ export function TabPanel ({ userData, setUserData }) {
         }))
     }
 
+    /**
+     * 
+     * @param {Object} experienceToAdd - The object to add
+     * @param {string} experienceToAdd.id - Unique ID of the experience entry (generated with crypto.randomUUID())
+     * @param {string} experienceToAdd.company - Name of company
+     * @param {string} experienceToAdd.position - Position at the company
+     * @param {string} experienceToAdd.startYear - Start year of working at the company
+     * @param {string} experienceToAdd.endYear - End year of working at the company
+     * @param {string} experienceToAdd.description - Brief description of your responsibilies at the company, etc.
+     */
+    function addExperience (experienceToAdd) {
+        const newExperience = {
+            ...experienceToAdd,
+            id: crypto.randomUUID()
+        }
+        setUserData(prev => ({
+            ...prev,
+            experience: [...prev.experience, newExperience]
+        }))
+        setShowExperienceForm(false)
+    }
+
+    /**
+     * 
+     * @param {Object} experienceToDelete - The object to remove
+     * @param {string} experienceToDelete.id - Unique ID of the experience entry (generated with crypto.randomUUID())
+     * @param {string} experienceToDelete.company - Name of company
+     * @param {string} experienceToDelete.position - Position at the company
+     * @param {string} experienceToDelete.startYear - Start year of working at the company
+     * @param {string} experienceToDelete.endYear - End year of working at the company
+     * @param {string} experienceToDelete.description - Brief description of your responsibilies at the company, etc.
+     */
+    function deleteExperience (experienceToDelete) {
+        setUserData(prev => ({
+            ...prev,
+            experience: prev.experience.filter(experience => experience.id !== experienceToDelete.id)
+        }))
+    }
+    
+    /**
+     * 
+     * @param {Object} experienceToUpdate - The new object to replace the old one.
+     * @param {string} experienceToUpdate.id - Unique ID of the experience entry (generated with crypto.randomUUID())
+     * @param {string} experienceToUpdate.company - Name of company
+     * @param {string} experienceToUpdate.position - Position at the company
+     * @param {string} experienceToUpdate.startYear - Start year of working at the company
+     * @param {string} experienceToUpdate.endYear - End year of working at the company
+     * @param {string} experienceToUpdate.description - Brief description of your responsibilies at the company, etc.
+     */
+    function updateExperience(experienceToUpdate) {
+        setUserData(prev => ({
+            ...prev,
+            experience: prev.experience.map(experience => 
+                experience.id === experienceToUpdate.id ? experienceToUpdate : experience
+            )
+        }))
+    }
+
     return (
         <>
             <div className="flex min-w-0 w-full">
@@ -253,6 +312,18 @@ export function TabPanel ({ userData, setUserData }) {
             }
             {tab === "experienceTab" &&
                 <>
+                    { /* Display each experience card */}
+                    <div className="flex flex-col gap-4 mt-2 mx-6">
+                        {userData.experience.map(experience => (
+                            <ExperienceCard 
+                                key={experience.id}
+                                experience={experience}
+                                onDelete={experienceToDelete => deleteExperience(experienceToDelete)}
+                                onSave={experienceToUpdate => updateExperience(experienceToUpdate)}
+                            />
+                        ))}
+                    </div>
+
                     {/* Add experience button should only be visible if the form is not open */}
                     {!showExperienceForm && (
                         <div className="flex items-center justify-center my-4">
@@ -263,8 +334,8 @@ export function TabPanel ({ userData, setUserData }) {
                     {/* ExperienceForm is shown when the user is adding or editing a skill */}
                     {showExperienceForm && 
                         <ExperienceForm 
-                            onSubmit={newExperience => console.log("Add new experience")}
-                            setShowEducationForm={setShowEducationForm}
+                            onSubmit={experienceToAdd => addExperience(experienceToAdd)}
+                            setShowExperienceForm={setShowExperienceForm}
                         />
                     }
                 </>

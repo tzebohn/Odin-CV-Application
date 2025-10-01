@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export function ExperienceForm (initialData) {
+export function ExperienceForm ({ initialData, onSubmit, showDetails, setShowExperienceForm, onCancel }) {
     // Company name
     //Position 
     //start date end date
@@ -24,6 +24,12 @@ export function ExperienceForm (initialData) {
         }
     )
 
+    useEffect(() => {
+        if (initialData) {
+            setExperienceEntry(initialData)
+        }
+    }, [initialData])
+
     // Tailwindcss styles 
     const labelStyle= `break-words text-sm font-medium md:text-base lg:text-lg`
     const inputStyle = `bg-gray-100 text-black p-1 px-3 text-sm md:py-2 md:text-base font-semibold rounded-md outline-none focus:border-blue-500 focus:border-2 border-2 border-gray-100 w-full`
@@ -32,7 +38,7 @@ export function ExperienceForm (initialData) {
     // Handles when user submits form
     function handleSubmit (e) {
         e.preventDefault()
-        console.log("Submitting form")
+        onSubmit(experienceEntry)
     }
 
     return (
@@ -111,13 +117,18 @@ export function ExperienceForm (initialData) {
                     value={experienceEntry.description}
                     onChange={(e) => setExperienceEntry(prev => ({
                         ...prev,
-                        description: e.target.area
+                        description: e.target.value
                     }))}
                     className={`${inputStyle}`}
                 />
             </div>
 
             <button className={`${btnStyle}`}>Save</button>
+            {showDetails ? (
+                <button type="button" className={`${btnStyle} bg-red-500 hover:bg-red-600`} onClick={() => onCancel(experienceEntry)}>Delete</button>
+            ) : (
+                <button type="button" className={`${btnStyle} bg-red-500 hover:bg-red-600`} onClick={() => setShowExperienceForm(false)}>Cancel</button>
+            )}
         </form>
     )
 }

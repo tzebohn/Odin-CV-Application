@@ -10,6 +10,7 @@ function App () {
     birthday: "",
     skills: [],
     education: [],
+    experience: []
   });
 
   return (
