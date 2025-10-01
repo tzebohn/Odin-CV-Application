@@ -31,8 +31,11 @@ export function TabPanel ({ userData, setUserData }) {
         if (tab !== tabName) {
             //console.log(`Current tab: ${tab} Changing to: ${tabName}`)
             setTab(tabName)
-            setIsFormVisible(false) // Reset and hide when changing tabs
-            setEditingSkillset(false) // Reset and hide when changing tabs
+            // Reset form visibility when changing tabs
+            setIsFormVisible(false)
+            setEditingSkillset(false)
+            setShowEducationForm(false)
+            setShowExperienceForm(false)
         }
     } 
 
