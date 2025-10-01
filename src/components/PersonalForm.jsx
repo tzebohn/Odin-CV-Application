@@ -24,6 +24,10 @@ export function PersonalForm ({ userData, setUserData }) {
                 <input type="email" name="email" id="email" className={`${inputStyle}`} placeholder="Enter your email" value={userData.email} onChange={(e) => handleChange(e)}/>
             </div> 
             <div className="flex flex-col">
+                <label htmlFor="phone" className={`${labelStyle}`}>Phone number</label>
+                <input type="tel" name="phone" id="phone" className={`${inputStyle}`} placeholder="Enter your number" value={userData.phone} onChange={(e) => handleChange(e)}/>
+            </div> 
+            <div className="flex flex-col">
                 <label htmlFor="birthday" className={`${labelStyle}`}>Date of Birth</label>
                 <input type="date" name="birthday" id="birthday" className={`${inputStyle}`} value={userData.birthday} onChange={(e) => handleChange(e)}/>
             </div> 

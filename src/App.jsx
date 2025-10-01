@@ -7,6 +7,7 @@ function App () {
   const [userData, setUserData] = useState({
     name: "",
     email: "",
+    phone: "",
     birthday: "",
     skills: [],
     education: [],
