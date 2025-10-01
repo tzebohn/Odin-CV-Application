@@ -175,7 +175,7 @@ export function TabPanel ({ userData, setUserData }) {
     }
 
     /**
-     * 
+     * Adds an experience object to the userData.experience array
      * @param {Object} experienceToAdd - The object to add
      * @param {string} experienceToAdd.id - Unique ID of the experience entry (generated with crypto.randomUUID())
      * @param {string} experienceToAdd.company - Name of company
@@ -197,7 +197,7 @@ export function TabPanel ({ userData, setUserData }) {
     }
 
     /**
-     * 
+     * Deletes an existing experience object in userData.experience array
      * @param {Object} experienceToDelete - The object to remove
      * @param {string} experienceToDelete.id - Unique ID of the experience entry (generated with crypto.randomUUID())
      * @param {string} experienceToDelete.company - Name of company
@@ -214,7 +214,7 @@ export function TabPanel ({ userData, setUserData }) {
     }
     
     /**
-     * 
+     * Replaces an existing experience object with the new one
      * @param {Object} experienceToUpdate - The new object to replace the old one.
      * @param {string} experienceToUpdate.id - Unique ID of the experience entry (generated with crypto.randomUUID())
      * @param {string} experienceToUpdate.company - Name of company
