@@ -17,7 +17,6 @@ export function TabPanel ({ userData, setUserData }) {
     const [isFormVisible, setIsFormVisible] = useState(false) // Skillset Form visibility
     const [editingSkillSet, setEditingSkillset] = useState(false) // Used to determine if a user is currently editing a previous skillset
     const [showEducationForm, setShowEducationForm] = useState(false) // Education Form visibility
-    const [editingEducation, setEditingEducation] = useState(false) // Check if the user is editing existing education form
     const [showExperienceForm, setShowExperienceForm] = useState(false) // Experience Form visibility
 
     //Tailwindcss styling
@@ -26,7 +25,11 @@ export function TabPanel ({ userData, setUserData }) {
     let spanStyle = `break-words text-xs sm:text-sm lg:text-xl`
     let addBtnStyle = `bg-blue-500 text-white font-semibold text-base md:text-lg p-1 px-2 md:p-2 md:px-4 rounded-lg cursor-pointer hover:bg-blue-600`
 
-    // Function updates Tab useState
+    /**
+     * Updates the active tab state 
+     * @param {string} tabName - The name of the tab to switch to.
+     *                           Valid values: 'personalTab', 'skillsetTab', 'educationTab', 'experienceTab' 
+     */
     const changeTab = (tabName) => {
         if (tab !== tabName) {
             //console.log(`Current tab: ${tab} Changing to: ${tabName}`)
@@ -39,7 +42,10 @@ export function TabPanel ({ userData, setUserData }) {
         }
     } 
 
-    // Add new skill
+    /**
+     * Adds a new skill to the userData.skills array
+     * @param {string} newSkill - The skill to add.
+     */
     const addSkill = (newSkill) => {
         //console.log("Adding skill:", newSkill);
         setUserData(prev => {
@@ -58,7 +64,11 @@ export function TabPanel ({ userData, setUserData }) {
         setEditingSkillset(false)
     }
 
-    // Modifies old with new skill
+    /**
+     * Replaces an existing skill in the userData.skills array with a new one.
+     * @param {string} newSkill - The updated skill to replace the old one.
+     * @param {string} id - Unique ID of the skill to be replaced.
+     */
     function updateSkill (newSkill, id) {
         setUserData(prev => {
             const copy = [...prev.skills] 
@@ -75,7 +85,10 @@ export function TabPanel ({ userData, setUserData }) {
         })
     }
 
-    // Delete skill card, given unique id
+    /**
+     * Deletes an existing skill.
+     * @param {string} id - Unique ID of the skill to be deleted. 
+     */
     const deleteCard = (id) => {
         //console.log("Deleting:", id)
         setUserData(prev => {
