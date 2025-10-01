@@ -12,7 +12,7 @@ export function ExperienceCard ({ experience, onDelete, onSave }) {
             {showDetails ? (
                 <div className="bg-gray-200 rounded-lg">
                     <div 
-                        className="flex items-center justify-end rounded-lg cursor-pointer" 
+                        className="flex items-center justify-end rounded-lg cursor-pointer p-2" 
                         onClick={() => {
                             setShowDetails(prev => !prev)
                         }}
@@ -20,7 +20,9 @@ export function ExperienceCard ({ experience, onDelete, onSave }) {
                         <IoMdArrowDropup className={`${dropdownIcon}`}/>
                     </div>
 
-                    <div className="border p-2">
+                    <div className="border-t border-gray-500"></div>
+                    
+                    <div>
                         <ExperienceForm
                             initialData={experience}
                             showDetails={showDetails}

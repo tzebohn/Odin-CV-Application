@@ -272,8 +272,7 @@ export function TabPanel ({ userData, setUserData }) {
             {tab === "skillsetTab" &&
                 <>  
                     {/* Display each skill card */}
-                    <h1>Skills</h1>
-                    <div className="flex flex-col gap-4 mt-2 mx-6">
+                    <div className="flex flex-col gap-4 mt-6 mx-6">
                         {userData.skills.map(skill => (
                             <SkillCard key={skill.id} skill={skill} setEditingSkillset={setEditingSkillset} editingSkillSet={editingSkillSet} updateSkill={updateSkill} deleteCard={deleteCard}/>
                         ))}
@@ -298,8 +297,7 @@ export function TabPanel ({ userData, setUserData }) {
             {tab === "educationTab" && 
                 <>  
                     { /* Display each education card */}
-                    <h1>Universities</h1>
-                    <div className="flex flex-col gap-4 mt-2 mx-6">
+                    <div className="flex flex-col gap-4 mt-6 mx-6">
                         {userData.education.map(edu => (
                             <EducationCard 
                             key={edu.id} 
@@ -329,7 +327,7 @@ export function TabPanel ({ userData, setUserData }) {
             {tab === "experienceTab" &&
                 <>
                     { /* Display each experience card */}
-                    <div className="flex flex-col gap-4 mt-2 mx-6">
+                    <div className="flex flex-col gap-4 mt-6 mx-6">
                         {userData.experience.map(experience => (
                             <ExperienceCard 
                                 key={experience.id}
