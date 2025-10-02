@@ -11,6 +11,7 @@ export function SkillCard ({ skill, editingSkillSet, setEditingSkillset, updateS
     // Tailwindcss styling
     let btnStyle = `bg-blue-500 text-white font-semibold text-base md:text-lg p-1 px-2 md:p-2 md:px-4 rounded-lg cursor-pointer hover:bg-blue-600`
     let dropdownIcon = `flex-shrink-0 w-5 h-5 cursor-pointer`
+    const labelStyle= `break-words text-sm font-medium md:text-base lg:text-lg`
 
     // USEEFFECTS 
     // Sync newSkill with updated skill prop object
@@ -37,12 +38,12 @@ export function SkillCard ({ skill, editingSkillSet, setEditingSkillset, updateS
     return (
         <>  
             {showDetails ? (
-                <form className="bg-gray-200 rounded-lg p-2" onSubmit={handleEdit}>
-                    <div className="flex flex-col gap-2">
-                        <div className="flex items-center justify-between">
-                            <label htmlFor="newSkill">Edit Skill</label>
-                            <IoMdArrowDropup className={`${dropdownIcon}`} onClick={() => setShowDetails(prev => !prev)}/>
-                        </div>
+                <form className="bg-gray-200 rounded-lg" onSubmit={handleEdit}>
+                    <div className="flex items-center justify-end border-b border-gray-300 p-2 cursor-pointer" onClick={() => setShowDetails(prev => !prev)}>
+                        <IoMdArrowDropup className={`${dropdownIcon}`}/>
+                    </div>
+                    <div className="flex flex-col gap-2 p-2">
+                        <label htmlFor="newSkill" className={labelStyle}>Edit Skill</label>
                         <input 
                             type="text"
                             id="newSkill"
@@ -61,7 +62,7 @@ export function SkillCard ({ skill, editingSkillSet, setEditingSkillset, updateS
             ) : (
                 <div className="bg-gray-200 rounded-lg p-2 cursor-pointer hover:bg-gray-300" onClick={() => setShowDetails(prev => !prev)}>
                     <div className="flex items-center justify-between w-full">
-                        <span className="truncate">{skill.skill}</span>
+                        <span className="truncate font-semibold">{skill.skill}</span>
                         <IoMdArrowDropdown className={`${dropdownIcon}`}/> 
                     </div>
                 </div>

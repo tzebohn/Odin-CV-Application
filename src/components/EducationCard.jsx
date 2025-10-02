@@ -21,7 +21,7 @@ export function EducationCard ({ edu, onSave, onDelete }) {
                         <IoMdArrowDropup className={`${dropdownIcon}`}/>
                     </div>
                     
-                    <div className="border-t border-gray-500"></div>
+                    <div className="border-t border-gray-300"></div>
 
                     <div>
                         <EducationForm 
@@ -41,7 +41,7 @@ export function EducationCard ({ edu, onSave, onDelete }) {
             ) : (
                 <div className="bg-gray-200 rounded-lg p-2 cursor-pointer hover:bg-gray-300" onClick={() => setShowDetails(prev => !prev)}>
                     <div className="flex items-center justify-between w-full">
-                        <span className="truncate">{edu.university}</span>
+                        <span className="truncate font-semibold">{edu.university}</span>
                         <IoMdArrowDropdown className={`${dropdownIcon}`}/> 
                     </div>
                 </div>

@@ -17,15 +17,15 @@ function App () {
   });
 
   // Tailwindcss styles
-  let iconStyle = `text-sm md:text-base`
+  let iconStyle = `text-sm md:text-base text-gray-700`
   let headerStyle = `font-bold md:text-xl`
 
   return (
     <div className="app w-full overflow-x-hidden">
       <Header />
 
-      <main className="flex flex-col md:flex-row md:align-center min-h-screen bg-gray-100 p-5 min-w-0 md:justify-between gap-6">
-        <section className="w-full min-w-0 border rounded-md bg-white max-h-screen">
+      <main className="flex flex-col md:flex-row md:align-center bg-gray-100 p-5 min-h-screen min-w-0 md:justify-between gap-6">
+        <section className="w-full min-w-0 border rounded-md bg-white">
           <TabPanel userData={userData} setUserData={setUserData} />
         </section>
         <section className="w-full border rounded-md bg-white">

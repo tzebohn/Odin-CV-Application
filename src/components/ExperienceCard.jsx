@@ -20,7 +20,7 @@ export function ExperienceCard ({ experience, onDelete, onSave }) {
                         <IoMdArrowDropup className={`${dropdownIcon}`}/>
                     </div>
 
-                    <div className="border-t border-gray-500"></div>
+                    <div className="border-t border-gray-300"></div>
                     
                     <div>
                         <ExperienceForm
@@ -40,7 +40,7 @@ export function ExperienceCard ({ experience, onDelete, onSave }) {
             ) : (
                 <div className="bg-gray-200 rounded-lg p-2 cursor-pointer hover:bg-gray-300" onClick={() => setShowDetails(prev => !prev)}>
                     <div className="flex items-center justify-between w-full">
-                        <span className="truncate">{experience.company}</span>
+                        <span className="truncate font-semibold">{experience.company}</span>
                         <IoMdArrowDropdown className={`${dropdownIcon}`}/> 
                     </div>
                 </div>
