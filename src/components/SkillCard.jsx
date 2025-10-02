@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { MdModeEditOutline, MdDelete } from "react-icons/md";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
-export function SkillCard ({ skill, editingSkillSet, setEditingSkillset, updateSkill, deleteCard }) {
+export function SkillCard ({ skill, updateSkill, deleteCard }) {
 
     // USESTATES
     const [newSkill, setNewSkill] = useState(skill.skill) // Default value is the current skill description
