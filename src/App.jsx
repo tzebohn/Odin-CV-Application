@@ -87,7 +87,7 @@ function App () {
                         <h2 className="font-semibold md:text-xl">{experience.company}</h2>
                         <span className="text-sm md:text-base font-medium">{experience.startYear === experience.endYear ? 
                         `${experience.startYear} - PRESENT` : 
-                        `${experience.startYear - experience.endYear}`}</span>
+                        `${experience.startYear} - ${experience.endYear}`}</span>
                       </div>
                       <p className="font-medium">{experience.position}</p>
                       <p className="text-sm md:text-base text-gray-700 leading-relaxed">{experience.description}</p>
